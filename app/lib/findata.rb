@@ -16,10 +16,17 @@ end
 finnhub_client = FinnhubRuby::DefaultApi.new
 
 begin
+  # Get the company profile for Stock
   output = finnhub_client.company_profile2({symbol: 'AAPL'})
 
   # Convert the output to a hash that can be returned to the view
   company_profile = object_to_hash(output)
+
+  # Get Quote data for Stock
+  output = finnhub_client.quote('AAPL')
+
+  # Convert the output to a hash that can be returned to the view
+  company_quote = object_to_hash(output)
 
 rescue FinnhubRuby::ApiError => e
   puts "Exception when calling FinnhubRuby::DefaultApi->company_profile2: #{e}"
